@@ -1,20 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Pokemon TCG Database
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-button class="btn-fav" routerLink="../favorites">View Favorites</ion-button>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setSearch()" placeholder="Search for sets..."></ion-searchbar>
+  <ion-list *ngFor="let result of (results | async)" [routerLink]="['./', result.id]">
+    <ion-item button>
+      <ion-avatar slot="start">
+        <img [src]="result.images.symbol">
+      </ion-avatar>
+      <ion-label>
+        {{result.name}}
+        <ion-label color="danger" class="subheading">{{result.releaseDate}}</ion-label>
+      </ion-label>
+    </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  </ion-list>
 </ion-content>

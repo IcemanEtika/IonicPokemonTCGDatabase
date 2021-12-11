@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CardsService } from '../services/cards.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +9,17 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  results: Observable<any>;
+  searchResults: Observable<any>;
+  searchTerm = '';
+  constructor(private httpService: CardsService) {}
 
-  constructor() {}
-
+  ngOnInit() {
+    this.results = this.httpService.getSets();
+  }
+  setSearch() {
+    this.searchResults = this.results.pipe(map(results =>
+      results.filter(result => result.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()))));
+    this.results = this.searchResults;
+  }
 }

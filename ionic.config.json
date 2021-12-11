@@ -1,7 +1,8 @@
 {
   "name": "PkmnTCGIonic",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

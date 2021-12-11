@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Favorites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="cardSearch()" placeholder="Search for cards..."></ion-searchbar>
+  <ion-button class="btn-del" color="danger" (click)="deleteAll()">Delete All</ion-button>
+  <ion-list *ngFor="let result of results" [routerLink]="['./', result.card_id]">
+    <ion-item button>
+      <ion-avatar slot="start">
+        <img [src]="result.card_img">
+      </ion-avatar>
+      <ion-label>
+        {{result.card_name}}
+        <ion-label color="danger" class="subheading">{{result.set_num}}</ion-label>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

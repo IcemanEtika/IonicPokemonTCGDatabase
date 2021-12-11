@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="showInfo()">?</ion-button>
+    </ion-buttons>
+    <ion-title>All Cards</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="cardSearch()" placeholder="Search for cards..."></ion-searchbar>
+  <ion-list *ngFor="let result of (results | async)" [routerLink]="['./', result.id]">
+    <ion-item button>
+      <ion-avatar slot="start">
+        <img [src]="result.images.small">
+      </ion-avatar>
+      <ion-label>
+        {{result.name}}
+        <ion-label color="danger" class="subheading">{{result.number}}</ion-label>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
